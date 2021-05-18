@@ -1,14 +1,12 @@
 "use strict";
 
-// サーバ接続先のURL（パスは/startNew）
-const serverUrl = 'https://nicomatsu-demo.herokuapp.com/startNew';
-
-
+// サーバ接続先のURL
 const electron = require('electron');
 const elc_app = electron.app;
 const elc_BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
 const path = require('path');
+let connectWindow;
 let inputWindow;
 let loginWindow;
 let displayWindow;
@@ -19,6 +17,25 @@ let isLoginWindow = false;
 
 //読み込み時イベント
 elc_app.on('ready', function (event) {
+  connectWindow = new electron.BrowserWindow({
+      width: 500,
+      height: 200,
+      webPreferences: {
+        nodeIntegration: false,
+        contextIsolation: true,
+        preload: __dirname + '/preload.js'
+      }
+  });
+  // 前面に表示
+  connectWindow.setAlwaysOnTop(true);
+
+  // 接続先入力ページを開く
+  connectWindow.loadURL('file://' + __dirname + '/connect.html');
+});
+
+//接続先入力時のイベント
+ipcMain.on("heroku-app-name", (event, herokuAppName)=>{
+  const serverUrl = 'https://' + herokuAppName + '.herokuapp.com/startNew';
   inputWindow = new electron.BrowserWindow({
       width: 500,
       height: 200,
@@ -33,6 +50,8 @@ elc_app.on('ready', function (event) {
 
   // ルーム名入力前にプロキシのログイン要求を発生させたいので、サーバアクセスしてstartNewページを取得
   inputWindow.loadURL(serverUrl);
+  // 接続先入力ウィンドウを閉じる
+  connectWindow.close();
 });
 
 

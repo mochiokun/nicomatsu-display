@@ -13,7 +13,10 @@ contextBridge.exposeInMainWorld(
         // Fromレンダラ Toメインでプロキシ認証のログイン情報を送信する
         sendProxyAuth: (username, password) => {
             ipcRenderer.send("proxy-auth", username, password);
+        },
+        // Fromレンダラ Toメインで接続先情報を送信する
+        sendAppName: (herokuAppName) => {
+            ipcRenderer.send("heroku-app-name", herokuAppName);
         }
     }
 );
-
