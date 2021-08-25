@@ -23,7 +23,7 @@ mac: 動作未確認
 Linux mint： 動作不可
 
 # Usage with Installer
-* [windows10用インストーラ](https://github.com/mochiokun/nicomatsu-display/archive/refs/tags/installer_win10_v1.0.0.zip)
+* [windows10用インストーラ](https://github.com/mochiokun/nicomatsu-display/archive/refs/tags/installer_win10_v2.0.0.zip)
 Windows10用には上記のリンクよりインストーラをダウンロードしてインストールされたい。
 ※前提として[nicomatsu-server](https://github.com/mochiokun/nicomatsu-server)がHeroku上にデプロイ済みであること。
 1. 接続先のHerokuアプリ名を入力。
@@ -32,6 +32,7 @@ Windows10用には上記のリンクよりインストーラをダウンロー�
 3. ルーム名（同時開催時の部屋分け用）の入力ウィンドウが開くので入力してログインする。
 4. 3画面（コントローラ・アンケート・コメント表示画面）が起動する
     * コメント表示画面は背景やメニューバーなどを透過させているので、一見は2画面起動しているように見える。
+    * nicomatsu-serverでBasic認証をOnにしている場合は、認証画面が表示される。
 5. コントローラで操作した内容が弾幕コメントやスタンプとなって画面表示される、アンケートに反映される。
 6. 外部から投稿する場合は、コントローラ画面下部のQRコードの読み取り、またはURLを共有すること。
     * コントローラ画面のURL: `https://[YourHerokuAppName],herokuapp.com/controller/[ルーム名]`　
@@ -63,12 +64,20 @@ npx electron-builder --win --x64
 # Mac用のインストーラー(.dmg)が作成される ※動作未確認
 npx electron-builder --mac --x64
 ```
+* 注意：Windowsでユーザ名に全角文字を含む場合、electron-builderがエラーとなる。
+  * ユーザ名/AppDataがASCIIのパスになるよう移動する（他アプリでも利用されるフォルダのため危険）
+  * ASCIIのユーザ名でアカウントを作成しなおす（推奨）
+　* [参考サイト:Electron-builderでパスに日本語を含んでいる場合はビルド出来ない](https://www.suzu6.net/posts/259-electron-build-utf8/)
 
 ## 接続先URLを固定またはHeroku以外としたい場合
-1. 本Gitリポジトリの`fixedurl`ブランチを選択して、ソースコードをダウンロードする（GitCloneでもよい）
-2. main.js の接続先サーバのURL定義部分を修正する。※パス名は `/startNew`とすること
+1. `src/main.js` の接続先サーバのURL定義部分を修正し、`hrokuAppNameChangeableFlg`を`false`に設定する。
 ``` javascript
-const serverUrl = 'https://nicomatsu-demo.herokuapp.com/startNew';
+// サーバ接続先のURL
+let serverUrl = 'https://YourServerURL:2525';　//nicomatsuサーバのポートは2525
+
+// 接続先URL（HerokuApp名）を入力して変更したい場合はtrue
+// 本設定をtrueにした場合、上記のserverUrlは無視される
+const hrokuAppNameChangeableFlg = false; //falseに変更する
 ```
 3. Usage with Sourceを参考に利用する。（接続先の入力画面が表示されない）
 

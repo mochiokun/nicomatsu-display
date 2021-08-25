@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>接続先選択</title>
+</head>
+
+<body>
+  <form>
+    <p>接続先のHerokuアプリ名(URL)を入力してください。
+    <p>https://<input type="url" id="herokuAppName" placeholder="Your Heroku AppName">.herokuapp.com</p>
+    <button onclick="sendIpc();">接続</button>
+  </form>
+</body>
+
+<script>
+  // ログインボタン
+  function sendIpc(){
+    // IPCチャネル"connet-url"で接続先情報を送信
+    window.api.sendAppName(
+        document.getElementById("herokuAppName").value
+    );
+}
+</script>
+</html>
