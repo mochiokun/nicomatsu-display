@@ -3,7 +3,7 @@
 // サーバ接続先のURL
 let serverUrl = 'https://nicomatsu.herokuapp.com';
 
-// 接続先URL（HerokuApp名）を入力して変更したい場合はtrue
+// 接続先URLを入力して変更したい場合はtrue
 // 本設定をtrueにした場合、上記のserverUrlは無視される
 const hrokuAppNameChangeableFlg = true; //true or false　デフォルト：true
 
@@ -58,7 +58,7 @@ elc_app.on('ready', function (event) {
 
 //接続先入力時のイベント
 ipcMain.on("heroku-app-name", (event, herokuAppName)=>{
-  serverUrl = 'https://' + herokuAppName + '.herokuapp.com/startNew';
+  serverUrl = 'https://' + herokuAppName + '/startNew';
   inputWindow = new electron.BrowserWindow({
       width: 500,
       height: 220,
