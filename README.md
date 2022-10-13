@@ -23,7 +23,7 @@ mac: 動作未確認
 Linux mint： 動作不可
 
 # Usage with Installer
-* [windows10用インストーラ](https://github.com/mochiokun/nicomatsu-display/archive/refs/tags/installer_win10_v2.0.0.zip)
+* [windows10用インストーラ](https://github.com/mochiokun/nicomatsu-display/archive/refs/tags/installer_win10_v3.0.0.zip)
 Windows10用には上記のリンクよりインストーラをダウンロードしてインストールされたい。
 ※前提として[nicomatsu-server](https://github.com/mochiokun/nicomatsu-server)がHeroku上にデプロイ済みであること。
 1. 接続先のHerokuアプリ名を入力。
