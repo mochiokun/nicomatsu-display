@@ -25,8 +25,8 @@ Linux mint： 動作不可
 # Usage with Installer
 * [windows10用インストーラ](https://github.com/mochiokun/nicomatsu-display/archive/refs/tags/installer_win10_v2.0.0.zip)
 Windows10用には上記のリンクよりインストーラをダウンロードしてインストールされたい。
-※前提として[nicomatsu-server](https://github.com/mochiokun/nicomatsu-server)がHeroku上にデプロイ済みであること。
-1. 接続先のHerokuアプリ名を入力。
+※前提として[nicomatsu-server](https://github.com/mochiokun/nicomatsu-server)がnode.jsサーバー上にデプロイ済みであること。
+1. 接続先のサーバ名を入力。
 2. プロキシ環境下の場合は認証用のウィンドウが開くので、プロキシサーバのID/PWで認証する。
     * プロキシサーバは本ツールに依るものではないため、ID/PWが不明、認証エラーなどは各自が利用されているネットワーク管理者に確認すること。
 3. ルーム名（同時開催時の部屋分け用）の入力ウィンドウが開くので入力してログインする。
@@ -35,7 +35,7 @@ Windows10用には上記のリンクよりインストーラをダウンロー�
     * nicomatsu-serverでBasic認証をOnにしている場合は、認証画面が表示される。
 5. コントローラで操作した内容が弾幕コメントやスタンプとなって画面表示される、アンケートに反映される。
 6. 外部から投稿する場合は、コントローラ画面下部のQRコードの読み取り、またはURLを共有すること。
-    * コントローラ画面のURL: `https://[YourHerokuAppName],herokuapp.com/controller/[ルーム名]`　
+    * コントローラ画面のURL: `https://[YourServerURL]/controller/[ルーム名]`　
 
 ## Caution
 * マルチディスプレイを使用している場合、メインディスプレイのサイズでウィンドウが開かれる。コメント表示画面はサイズ変更不可なので、メインディスプレイの設定に注意されたい。
